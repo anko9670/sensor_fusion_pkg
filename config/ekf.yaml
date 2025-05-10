@@ -1,0 +1,108 @@
+ekf_filter_node_odom:
+  ros__parameters:
+    frequency: 30.0
+    sensor_timeout: 0.1
+    two_d_mode: true
+    publish_tf: true    
+    transform_time_offset: 0.0 #TF 변환(map-> odom. odom -> base_linkd)의 타임스탬프를 살짝 미래 시점으로 밀어주는 값
+    transform_timeout: 0.0  
+    print_diagnostics: true  # EKF 노드가 센서 수신상태, 필터 상태, 시간 지연 문제등을 /diagnostics 토픽으로 퍼블리시    
+    use_control: false       # /cmd_vel 토픽으로부터 가속도항을 추정하여 예측 단계에 사용
+
+
+    odom_frame: odom
+    base_link_frame: base_link
+    world_frame: odom
+
+
+    # wheel odometry 설정 - vx,vy 선속도, vyaw 
+    odom0: odometry/wheel                    #frame_id : odom
+    odom0_config: [false, false, false,      # x, y, z
+                   false, false, false,     # roll, pitch, yaw
+                   true, true, false,     # vx, vy, vz(선속도)
+                   false, false, true,    # vroll, vpitch, vyaw
+                   false,false,false]     
+                   
+    odom0_differential: true
+    odom0_relative: false
+    odom0_queue_size: 10
+
+
+
+    # IMU 설정 - yaw와 yaw 속도만 사용
+    imu0: imu/data                            #frame_id : base_imu   	IMU frame이 base_link와 다를 경우 static_transform_publisher 필요
+    imu0_config: [false,  false,  false,     # orientation: roll, pitch, yaw
+              false,  false,  true,     # linear acceleration: x, y, z
+              false,  false,  false,     # angular velocity: x, y, z
+              false, false, true,         
+              false, false, false]
+
+    imu0_differential: false
+    imu0_relative: false
+    imu0_queue_size: 10
+    imu0_remove_gravitational_acceleration: true
+      
+ekf_filter_node_map:
+  ros_parameters:
+    frequency: 30.0
+    sensor_timeout: 0.1
+    two_d_mode: true
+    transform_time_offset:  0.0
+    transform_timeout: 0.0
+    print_diagnostics: true
+    publish_tf: true
+    use_control: false
+
+    map_frame: map
+    odom_frame: odom
+    base_link_frame: base_link
+    world_frame: map
+        
+    odom0: odometry/wheel
+    odom0_config: [false, false, false,
+                  false, false, false,
+                  false,  false,  false,
+                  false, false, false,
+                  false, false, false]
+        
+    odom0_queue_size: 10        
+    odom0_differential: false
+    odom0_relative: false
+    
+    odom1: odometry/gps       # -> navsat transform 에서 퍼블리시하는 topic 이여야함 이거 맞나?
+    odom1_config: [true,  true,  false,
+                  false, false, false,
+                  false, false, false,
+                  false, false, false,
+                  false, false, false]
+    odom1_queue_size: 10
+    odom1_nodelay: true
+    odom1_differential: false
+    odom1_relative: false
+        
+        
+    imu0: imu/data                            #frame_id : base_imu   	IMU frame이 base_link와 다를 경우 static_transform_publisher 필요
+    imu0_config: [false,  false,  false,     # orientation: roll, pitch, yaw
+              false,  false,  true,     # linear acceleration: x, y, z
+              false,  false,  false,     # angular velocity: x, y, z
+              false, false, true,         
+              false, false, false]
+
+    imu0_differential: false
+    imu0_relative: false
+    imu0_queue_size: 10
+    imu0_remove_gravitational_acceleration: true
+   
+navsat_transform_node:
+  ros__parameters:
+    frequency: 30.0
+    delay: 3.0                   #GPS-> UTM 변환을 수행하기 전 기다릴 시간(초단위)
+    yaw_offset:  1.570796327              #IMU yaw 기준 보정값(IMU yaw=0 일떄 로봇이 북쪽을 보고 있다면 n/2(=1.5708)로 설정해야 동쪽 기준으로 보정됨)
+    magnetic_declination_radians: 0.0
+    wait_for_datum: false  # auto-set based on first GPS fix    
+    broadcast_utm_transform : true
+    publish_filtered_gps: true
+    zero_altitude: true
+    use_odometry_yaw: false
+   
+ 
