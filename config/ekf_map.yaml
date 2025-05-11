@@ -1,0 +1,53 @@
+ekf_filter_node_map:
+  ros__parameters:
+    frequency: 30.0
+    sensor_timeout: 0.1
+    two_d_mode: true
+    transform_time_offset:  0.0
+    transform_timeout: 0.0
+    print_diagnostics: true
+    publish_tf: true
+    use_control: false
+
+    map_frame: map
+    odom_frame: odom
+    base_link_frame: base_link
+    world_frame: map
+        
+    odom0: odometry/wheel
+    odom0_config: [false, false, false,
+                  false, false, false,
+                  false,  false,  false,
+                  false, false, false,
+                  false, false, false]
+        
+    odom0_queue_size: 10        
+    odom0_differential: false
+    odom0_relative: false
+    
+    odom1: odometry/gps       # -> navsat transform 에서 퍼블리시하는 topic 이여야함 이거 맞나?
+    odom1_config: [true,  true,  false,
+                  false, false, false,
+                  false, false, false,
+                  false, false, false,
+                  false, false, false]
+    odom1_queue_size: 10
+    odom1_nodelay: true
+    odom1_differential: false
+    odom1_relative: false
+        
+        
+    imu0: imu/data                            #frame_id : base_imu   	IMU frame이 base_link와 다를 경우 static_transform_publisher 필요
+    imu0_config: [false,  false,  false,     # orientation: roll, pitch, yaw
+              false,  false,  true,     # linear acceleration: x, y, z
+              false,  false,  false,     # angular velocity: x, y, z
+              false, false, true,         
+              false, false, false]
+
+    imu0_differential: false
+    imu0_relative: false
+    imu0_queue_size: 10
+    imu0_remove_gravitational_acceleration: true
+   
+   
+ 

@@ -10,7 +10,11 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/sensor_fusion_pkg/launch', ['launch/fusion.launch.py']),
-        ('share/sensor_fusion_pkg/config', ['config/ekf.yaml']),
+        ('share/sensor_fusion_pkg/config', [
+            'config/ekf_odom.yaml',
+            'config/ekf_map.yaml',
+            'config/navsat.yaml'
+            ]),
         ('share/' + package_name, ['package.xml']),
     ],
     install_requires=['setuptools'],

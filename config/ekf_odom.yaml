@@ -1,0 +1,43 @@
+ekf_ilter_node_odom:
+  ros__parameters:
+    frequency: 30.0
+    sensor_timeout: 0.1
+    two_d_mode: true
+    publish_tf: true    
+    transform_time_offset: 0.0 #TF 변환(map-> odom. odom -> base_linkd)의 타임스탬프를 살짝 미래 시점으로 밀어주는 값
+    transform_timeout: 0.0  
+    print_diagnostics: true  # EKF 노드가 센서 수신상태, 필터 상태, 시간 지연 문제등을 /diagnostics 토픽으로 퍼블리시    
+    use_control: false       # /cmd_vel 토픽으로부터 가속도항을 추정하여 예측 단계에 사용
+
+
+    odom_frame: odom
+    base_link_frame: base_link
+    world_frame: odom
+
+
+    # wheel odometry 설정 - vx,vy 선속도, vyaw 
+    odom0: odometry/wheel                    #frame_id : odom
+    odom0_config: [false, false, false,      # x, y, z
+                   false, false, false,     # roll, pitch, yaw
+                   true, true, false,     # vx, vy, vz(선속도)
+                   false, false, true,    # vroll, vpitch, vyaw
+                   false,false,false]     
+                   
+    odom0_differential: true
+    odom0_relative: false
+    odom0_queue_size: 10
+
+
+
+    # IMU 설정 - yaw와 yaw 속도만 사용
+    imu0: imu/data                            #frame_id : base_imu   	IMU frame이 base_link와 다를 경우 static_transform_publisher 필요
+    imu0_config: [false,  false,  false,     # orientation: roll, pitch, yaw
+              false,  false,  true,     # linear acceleration: x, y, z
+              false,  false,  false,     # angular velocity: x, y, z
+              false, false, true,         
+              false, false, false]
+
+    imu0_differential: false
+    imu0_relative: false
+    imu0_queue_size: 10
+    imu0_remove_gravitational_acceleration: true
