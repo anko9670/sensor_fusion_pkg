@@ -37,7 +37,7 @@ ekf_filter_node_map:
     odom1_relative: false
         
         
-    imu0: imu/data                            #frame_id : base_imu   	IMU frame이 base_link와 다를 경우 static_transform_publisher 필요
+    imu0: imu                           #frame_id : base_imu   	IMU frame이 base_link와 다를 경우 static_transform_publisher 필요
     imu0_config: [false,  false,  false,     # orientation: roll, pitch, yaw
               false,  false,  true,     # linear acceleration: x, y, z
               false,  false,  false,     # angular velocity: x, y, z

@@ -6,7 +6,7 @@ from ament_index_python.packages import get_package_share_directory
 def generate_launch_description():
     config_path = os.path.join(
         get_package_share_directory('sensor_fusion_pkg'),
-        'config',
+        'config'
     )
 
     ekf_odom_config = os.path.join(config_path,'ekf_odom.yaml')
@@ -18,13 +18,15 @@ def generate_launch_description():
         package='sensor_fusion_pkg',
         executable='mtnode',
         name='mtnode',
+
+
         output='screen',
         parameters=[
-            {'device': '/dev/ttyUSB2'}, 
+            {'device': '/dev/ttyUSB2'},
             {'baudrate': 115200},
             {'timeout': 0.002},
             {'initial_wait': 0.1},
-            {'use_sim_time': False}
+            
         ]
     ),
     Node(
@@ -60,7 +62,7 @@ def generate_launch_description():
         executable='imu_cov_node',
         name='imu_cov_node',
         output='screen',
-        parameters=[{'use_sim_time': False}]
+        parameters=[{'use_sim_time': False}]    
     ),
     Node(
         package='robot_localization',
@@ -70,8 +72,8 @@ def generate_launch_description():
         parameters=[navsat_config,{'use_sim_time': False}],
         arguments=['--ros-args', '--log-level', 'navsat_transform_node:=error'],
         remappings=[
-            ('imu/data', '/imu/data'),
-            ('gps/fix', '/fix'),
+            ('imu/data', 'imu/data'),
+            ('gps/fix', 'gps/fix'),
             ('gps/filtered','gps/filtered'),
             ('odometry/gps', '/odometry/gps'),
             ('odometry/filtered', '/odometry/global')

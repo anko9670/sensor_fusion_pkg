@@ -6,8 +6,8 @@ class ImuCovarianceNode(Node):
     def __init__(self):
         super().__init__('imu_covariance_node')
 
-        self.sub = self.create_subscription(Imu, '/imu/data_raw', self.imu_callback, 10)
-        self.pub = self.create_publisher(Imu, '/imu/data', 10)
+        self.sub = self.create_subscription(Imu, '/imu/data', self.imu_callback, 10)
+        self.pub = self.create_publisher(Imu, 'imu', 10)
 
     def imu_callback(self, msg):
         # orientation_covariance 설정
