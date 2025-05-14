@@ -14,21 +14,21 @@ def generate_launch_description():
     navsat_config = os.path.join(config_path,'navsat.yaml')
 
     return LaunchDescription([
-    Node(
-        package='sensor_fusion_pkg',
-        executable='mtnode',
-        name='mtnode',
+    # Node(
+    #     package='sensor_fusion_pkg',
+    #     executable='mtnode',
+    #     name='mtnode',
 
 
-        output='screen',
-        parameters=[
-            {'device': '/dev/ttyUSB2'},
-            {'baudrate': 115200},
-            {'timeout': 0.002},
-            {'initial_wait': 0.1},
+    #     output='screen',
+    #     parameters=[
+    #         {'device': '/dev/ttyUSB0'},
+    #         {'baudrate': 115200},
+    #         {'timeout': 0.002},
+    #         {'initial_wait': 0.1},
             
-        ]
-    ),
+    #     ]
+    # ),
     Node(
         package='sensor_fusion_pkg',
         executable='gpsnode',
