@@ -11,7 +11,6 @@ ekf_filter_node_map:
 
     map_frame: map
     odom_frame: odom
-    base_link_frame: base_link
     world_frame: map
         
     odom0: odometry/wheel
@@ -25,7 +24,7 @@ ekf_filter_node_map:
     odom0_differential: false
     odom0_relative: false
     
-    odom1: odometry/gps       # -> navsat transform 에서 퍼블리시하는 topic 이여야함 이거 맞나?
+    odom1: odometry/gps    # -> navsat transform 에서 퍼블리시하는 topic 이여야함 이거 맞나?
     odom1_config: [true,  true,  false,
                   false, false, false,
                   false, false, false,

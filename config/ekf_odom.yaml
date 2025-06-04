@@ -18,7 +18,7 @@ ekf_filter_node_odom:
     odom0: odometry/wheel
     odom0_config: [false, false, false,
                   false, false, false,
-                  true,  false,  false,
+                  true,  true,  false,
                   false, false, true,
                   false, false, false]    
                    
@@ -33,8 +33,8 @@ ekf_filter_node_odom:
     imu0_config: [false, false, false,
                   false,  false, true,
                   false, false, false,
-                  true,  true,  true,
-                  true,   true,  true]
+                  false,  false,  true,
+                  false,   false,  false]
 
     imu0_differential: false
     imu0_relative: false

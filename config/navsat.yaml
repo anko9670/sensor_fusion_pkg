@@ -5,7 +5,7 @@ navsat_transform_node:
     yaw_offset:  1.570796327              #IMU yaw 기준 보정값(IMU yaw=0 일떄 로봇이 북쪽을 보고 있다면 n/2(=1.5708)로 설정해야 동쪽 기준으로 보정됨)
     magnetic_declination_radians: 0.0
     wait_for_datum: false  # auto-set based on first GPS fix    
-    broadcast_utm_transform : false
-    publish_filtered_gps: false
+    broadcast_utm_transform : true
+    publish_filtered_gps: true
     zero_altitude: true
     use_odometry_yaw: false

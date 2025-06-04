@@ -59,8 +59,8 @@ def generate_launch_description():
     ),
     Node(
         package='sensor_fusion_pkg',
-        executable='imu_cov_node',
-        name='imu_cov_node',
+        executable='imu_rpy_node',
+        name='imu_rpy_node',
         output='screen',
         parameters=[{'use_sim_time': False}]    
     ),
@@ -74,8 +74,7 @@ def generate_launch_description():
         remappings=[
             ('imu/data', 'imu/data'),
             ('gps/fix', 'gps/fix'),
-            ('gps/filtered','gps/filtered'),
-            ('odometry/gps', '/odometry/gps'),
+            ('gps/filtered','gps/filtered'),            
             ('odometry/filtered', '/odometry/global')
         ]
     )
