@@ -30,6 +30,12 @@ def generate_launch_description():
     #     ]
     # ),
     Node(
+    package='sensor_fusion_pkg',
+    executable='odom_publisher_node',
+    name='odom_publisher_node',
+    output='screen'
+    ),
+    Node(
         package='sensor_fusion_pkg',
         executable='gpsnode',
         name='gps_node',

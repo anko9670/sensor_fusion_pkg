@@ -29,6 +29,7 @@ setup(
         'mtnode = sensor_fusion_pkg.mtnode:main',
         'gpsnode = sensor_fusion_pkg.gpsnode:main',
         'imu_rpy_node = sensor_fusion_pkg.imu_rpy_node:main',
+        'odom_publisher_node = sensor_fusion_pkg.odom_publisher_node:main'
         ],
     },
 )
