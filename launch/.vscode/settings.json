@@ -1,0 +1,23 @@
+{
+    "ros.distro": "humble",
+    "python.autoComplete.extraPaths": [
+        "/home/junghyun/ros2_ws/install/yaw_plot_pkg/lib/python3.10/site-packages",
+        "/home/junghyun/ros2_ws/install/xsens_driver/lib/python3.10/site-packages",
+        "/home/junghyun/ros2_ws/install/ublox_msgs/local/lib/python3.10/dist-packages",
+        "/home/junghyun/ros2_ws/install/sensor_fusion_pkg/lib/python3.10/site-packages",
+        "/home/junghyun/ros2_ws/install/rtcm_msgs/local/lib/python3.10/dist-packages",
+        "/home/junghyun/ros2_ws/install/nmea_navsat_driver/lib/python3.10/site-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/junghyun/ros2_ws/install/yaw_plot_pkg/lib/python3.10/site-packages",
+        "/home/junghyun/ros2_ws/install/xsens_driver/lib/python3.10/site-packages",
+        "/home/junghyun/ros2_ws/install/ublox_msgs/local/lib/python3.10/dist-packages",
+        "/home/junghyun/ros2_ws/install/sensor_fusion_pkg/lib/python3.10/site-packages",
+        "/home/junghyun/ros2_ws/install/rtcm_msgs/local/lib/python3.10/dist-packages",
+        "/home/junghyun/ros2_ws/install/nmea_navsat_driver/lib/python3.10/site-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ]
+}

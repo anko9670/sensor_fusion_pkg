@@ -1,40 +1,44 @@
+# zed_f9p_rtk_node.py
 import rclpy
 from rclpy.node import Node
 import subprocess
-import time
 
-class RTKSinglePortNode(Node):
+class ZEDF9PRTKNode(Node):
     def __init__(self):
-        super().__init__('rtk_single_port_node')
+        super().__init__('zed_f9p_rtk_node')
 
-        # Step 1: str2strë¡œ RTCM ë³´ì • ì „ì†¡ ì‹œìž‘ (ê³„ì† ì‹¤í–‰)
+        # RTCM 보정신호 수신 → ZED-F9P로 전달
         rtcm_command = (
             "/usr/local/bin/str2str "
             "-in ntrip://seoul:seoul@gnss.eseoul.go.kr:2101/DBON-RTCM32 "
-            "-out serial://ttyUSB0:115200"
+            "-out serial://ttyACM0:115200"
         )
-        self.get_logger().info("Sending RTCM correction to LC29H...")
+        self.get_logger().info("Sending RTCM correction to ZED-F9P via /dev/ttyACM0...")
         self.rtk_proc = subprocess.Popen(rtcm_command, shell=True)
 
-        # Step 2: nmea_serial_driverë¡œ GPS ìˆ˜ì‹  ì‹œìž‘ (ë…ë¦½ì ìœ¼ë¡œ ì‹¤í–‰)
+        # ublox_gps 노드 실행
         gps_command = (
-            "ros2 run nmea_navsat_driver nmea_serial_driver "
-            "--ros-args -p port:=/dev/ttyUSB0 -p baud:=115200"
+                "ros2 run ublox_gps ublox_gps_node "
+                "--ros-args "
+                "-p port:=/dev/ttyACM0 "
+                "-p frame_id:=gps "
+                "--params-file ~/ros2_ws/src/ublox/ublox_gps/config/zed_f9p.yaml "
+                "--remap /ublox_gps_node/fix:=/gps/fix"
         )
-        self.get_logger().info("Starting GPS data node...")
+        self.get_logger().info("Starting ublox_gps_node...")
         self.gps_proc = subprocess.Popen(gps_command, shell=True)
 
     def destroy_node(self):
         self.get_logger().info("Shutting down GPS and RTK processes...")
         if self.rtk_proc:
-            self.rtk_proc.terminate()  # RTCM ë³´ì • ì „ì†¡ ì¢…ë£Œ
+            self.rtk_proc.terminate()
         if self.gps_proc:
-            self.gps_proc.terminate()  # GPS ë°ì´í„° ìˆ˜ì‹  ì¢…ë£Œ
+            self.gps_proc.terminate()
         super().destroy_node()
 
 def main(args=None):
     rclpy.init(args=args)
-    node = RTKSinglePortNode()
+    node = ZEDF9PRTKNode()
     try:
         rclpy.spin(node)
     except KeyboardInterrupt:
