@@ -21,7 +21,7 @@ class ZEDF9PRTKNode(Node):
                 "ros2 run ublox_gps ublox_gps_node "
                 "--ros-args "
                 "-p port:=/dev/ttyACM0 "
-                "-p frame_id:=gps "
+                "-p frame_id:=base_link "
                 "--params-file ~/ros2_ws/src/ublox/ublox_gps/config/zed_f9p.yaml "
                 "--remap /ublox_gps_node/fix:=/gps/fix"
         )

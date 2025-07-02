@@ -38,7 +38,7 @@ class ImuRpyPublisher(Node):
         # Imu 메시지 생성
         imu_msg = Imu()
         imu_msg.header.stamp = self.get_clock().now().to_msg()
-        imu_msg.header.frame_id = 'imu_link'  # 필요 시 수정
+        imu_msg.header.frame_id = 'base_link'  # 필요 시 수정
 
         imu_msg.orientation.x = quat[0]
         imu_msg.orientation.y = quat[1]

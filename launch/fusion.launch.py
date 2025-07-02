@@ -20,19 +20,19 @@ def generate_launch_description():
         name='mtnode',
         output='screen',
         parameters=[
-            {'device': '/dev/ttyUSB1'},
+            {'device': '/dev/ttyUSB0'},
             {'baudrate': 115200},
             {'timeout': 0.002},
             {'initial_wait': 0.1},
             
         ]
     ),
-    Node(
-        package='sensor_fusion_pkg',
-        executable='odom_publisher_node',
-        name='odom_publisher_node',
-        output='screen'
-    ),
+    # Node(
+    #     package='sensor_fusion_pkg',
+    #     executable='odom_publisher_node',
+    #     name='odom_publisher_node',
+    #     output='screen'
+    # ),
     Node(
         package='sensor_fusion_pkg',
         executable='gpsnode',
@@ -79,7 +79,7 @@ def generate_launch_description():
             ('imu/data', 'imu/data'),
             ('gps/fix', 'gps/fix'),
             ('gps/filtered','gps/filtered'),            
-            ('odometry/filtered', '/odometry/global')
+            ('odometry/filtered', '/odometry/local')
         ]
     )
 ])

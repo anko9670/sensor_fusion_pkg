@@ -55,7 +55,7 @@ class XSensDriver(rclpy.node.Node):
                                    % no_rotation_duration)
             self.mt.SetNoRotation(no_rotation_duration)
 
-        self.frame_id = self.get_param('frame_id', 'base_imu')
+        self.frame_id = self.get_param('frame_id', 'base_link')
 
         self.frame_local = self.get_param('frame_local', 'ENU')
 
@@ -705,7 +705,7 @@ class XSensDriver(rclpy.node.Node):
         if self.pub_imu:
             self.imu_msg.header = self.h
             if self.imu_pub is None:
-                self.imu_pub = self.create_publisher(Imu, 'imu/data_raw', 10)
+                self.imu_pub = self.create_publisher(Imu, 'imu/data', 10)
             self.imu_pub.publish(self.imu_msg)
         if self.pub_raw_gps:
             self.raw_gps_msg.header = self.h
