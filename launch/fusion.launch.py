@@ -76,10 +76,10 @@ def generate_launch_description():
         parameters=[navsat_config,{'use_sim_time': False}],
         arguments=['--ros-args', '--log-level', 'navsat_transform_node:=error'],
         remappings=[
-            ('imu/data', 'imu/data'),
+            ('/imu','/imu'),
             ('gps/fix', 'gps/fix'),
             ('gps/filtered','gps/filtered'),            
-            ('odometry/filtered', '/odometry/local')
+            ('odometry/filtered', '/odometry/global')
         ]
     )
 ])
